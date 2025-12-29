@@ -75,19 +75,13 @@ def plot_scree(pca_model):
 # --- MAIN EXECUTION ---
 
 def full_analysis_pipeline(split="test", n_dims=5):
-    # 1. Load
     X_raw, y = load_split(split)
     idx = get_indices(y)
     
-    # 2. PCA & Variance Analysis
     X_pca, pca_model = run_pca(X_raw, n_components=n_dims)
     
-    # 3. Visualization
-    # Check if more dimensions help separation
     plot_component_distributions(X_pca, idx, n_dims=min(n_dims, 4))
     
-    # See how much total variance we are capturing
     plot_scree(pca_model)
 
-# Execute
 full_analysis_pipeline("test", n_dims=5)
